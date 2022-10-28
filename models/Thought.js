@@ -37,18 +37,15 @@ const thoughtTextSchema = new Schema({
         type: String,
         required: true
     },
-    reaction: [reactions]
-},
-    {
-        toJSON: {
-            virtuals: true,
+    reactions: [
+        {
+            type: String,
+            enum: ['happy', 'sad'],
         }
-    })
-
-thoughtText.virtual('reactionCount').get(function () {
-    return this.reaction.reduceRight((total, reaction) => total + reaction.length + 1, 0);
+    ]
 })
 
-const thought = model('Thought', thoughtTextSchema);
+const Thought = model('Thought', thoughtTextSchema);
+const Reaction = model('Reaction', reactionSchema);
 
-module.exports = thought;
+module.exports = Thought, Reaction;

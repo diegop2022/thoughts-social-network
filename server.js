@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const userRoute = require('./routes/api/user-routes')
+const thoughtRoute = require('./routes/api/thought-routes')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -10,6 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.use(userRoute);
+app.use(thoughtRoute)
+
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-network', {
     useNewUrlParser: true,
